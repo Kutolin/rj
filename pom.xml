@@ -1,0 +1,141 @@
+<!-- pom.xml -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 项目信息 -->
+    <groupId>com.example</groupId>
+    <artifactId>permissionsystem</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+    <name>PermissionSystem</name>
+    <description>权限系统项目，分层架构实现</description>
+
+    <!-- 父 POM，使用 Spring Boot Starter Parent -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.3</version> <!-- 请根据需要调整 Spring Boot 版本 -->
+        <relativePath/> <!-- 不使用相对路径 -->
+    </parent>
+
+    <!-- Java 版本 -->
+    <properties>
+        <java.version>17</java.version> <!-- 根据需要调整 Java 版本 -->
+    </properties>
+
+    <!-- 项目依赖 -->
+    <dependencies>
+        <!-- Spring Boot Starter Web：包含 Spring MVC、Tomcat 等 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Starter Data JPA：包含 Hibernate 等 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- MySQL Connector/J：连接 MySQL 数据库 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.0.33</version> <!-- 添加正确的版本号 -->
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Spring Boot Starter Security：用于安全性和认证 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- Bucket4J Core：用于实现限流 -->
+        <dependency>
+            <groupId>com.github.vladimir-bukhtoyarov</groupId>
+            <artifactId>bucket4j-core</artifactId>
+            <version>7.6.0</version>
+        </dependency>
+
+        <!-- Lombok（可选）：用于简化代码，自动生成 Getter/Setter 等 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.26</version> <!-- 修正版本号 -->
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Spring Boot Starter Test（可选）：用于单元测试 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring Security Test（可选）：用于安全性测试 -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Jackson Databind（已包含在 Spring Boot Starter Web 中，可选） -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <!-- Swagger/OpenAPI（可选）：用于 API 文档生成 -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+    </dependencies>
+
+    <!-- 插件配置 -->
+    <build>
+        <plugins>
+            <!-- Spring Boot Maven Plugin：用于打包和运行 Spring Boot 应用 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.1.3</version> <!-- 确保版本号与父 POM 一致 -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Maven Compiler Plugin：设置 Java 编译版本 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                    <parameters>true</parameters>
+                </configuration>
+            </plugin>
+
+            <!-- 不需要使用 lombok-maven-plugin -->
+        </plugins>
+    </build>
+
+    <!-- 依赖管理（可选）：用于集中管理依赖版本，如 Hibernate 等 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot Dependencies（已由父 POM 管理） -->
+            <!-- 这里可以添加其他依赖的版本管理 -->
+        </dependencies>
+    </dependencyManagement>
+</project>
